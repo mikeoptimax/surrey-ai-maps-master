@@ -42,8 +42,8 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero-bg min-h-screen flex items-center justify-center pt-20">
-        <div className="hero-content container mx-auto px-4">
+      <section className="hero-bg min-h-screen flex items-center justify-center pt-32">
+        <div className="hero-content container mx-auto px-4 pt-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-8">
               <h1 className="headline-giant text-white mb-8">
