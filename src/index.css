@@ -2,95 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* OptiMAX-ai Design System - Brutal Aesthetics for Surrey's Premier SEO Agency
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* OptiMAX-ai Brand Colors */
+    --navy: 225 55% 20%;        /* #1a1f4e - Primary brand navy */
+    --orange: 17 100% 60%;      /* #ff6b35 - Brand orange for "ai" and CTAs */
+    --white: 0 0% 100%;         /* #ffffff - Clean white */
+    --charcoal: 0 0% 4%;        /* #0a0a0a - Near black for contrast */
+    --gray-light: 210 20% 96%;  /* #f9fafb - Light backgrounds */
+    
+    /* Semantic Design System */
+    --background: var(--white);
+    --foreground: var(--charcoal);
+    
+    --primary: var(--navy);
+    --primary-foreground: var(--white);
+    
+    --secondary: var(--gray-light);
+    --secondary-foreground: var(--navy);
+    
+    --accent: var(--orange);
+    --accent-foreground: var(--white);
+    
+    --muted: var(--gray-light);
+    --muted-foreground: 220 9% 46%;
+    
+    --card: var(--white);
+    --card-foreground: var(--charcoal);
+    
+    --popover: var(--white);
+    --popover-foreground: var(--charcoal);
+    
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+    --ring: var(--orange);
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: var(--white);
+    
+    --radius: 0rem; /* Sharp corners for brutal design */
+    
+    /* Brutal Design Variables */
+    --brutal-shadow: 8px 8px 0px hsl(var(--charcoal));
+    --brutal-shadow-hover: 12px 12px 0px hsl(var(--charcoal));
+    --brutal-border: 4px solid hsl(var(--charcoal));
+    --brutal-transition: all 0.15s ease-out;
   }
 }
 
@@ -98,8 +58,107 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 18px;
+    line-height: 1.6;
+  }
+  
+  /* Typography System */
+  .headline-giant {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(80px, 15vw, 180px);
+    letter-spacing: -0.02em;
+    line-height: 0.9;
+    text-transform: uppercase;
+    transform: rotate(-1deg);
+    margin-left: -5px;
+  }
+  
+  .headline-xl {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    letter-spacing: -0.01em;
+    line-height: 0.95;
+    text-transform: uppercase;
+  }
+  
+  .headline-lg {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: clamp(32px, 6vw, 48px);
+    letter-spacing: -0.01em;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+  
+  .data-mono {
+    font-family: 'JetBrains Mono', 'Courier New', monospace;
+    font-weight: 600;
+  }
+  
+  /* Brutal Components */
+  .brutal-button {
+    @apply bg-accent text-accent-foreground px-8 py-4 font-bold text-lg;
+    border: var(--brutal-border);
+    box-shadow: var(--brutal-shadow);
+    transition: var(--brutal-transition);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  .brutal-button:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--brutal-shadow-hover);
+  }
+  
+  .brutal-button:active {
+    transform: translate(0, 0);
+    box-shadow: 4px 4px 0px hsl(var(--charcoal));
+  }
+  
+  .brutal-card {
+    @apply bg-card p-6;
+    border-left: 6px solid hsl(var(--orange));
+    transition: var(--brutal-transition);
+  }
+  
+  .brutal-card:hover {
+    box-shadow: 6px 6px 0px hsl(var(--charcoal) / 0.1);
+    transform: translate(-2px, -2px);
+  }
+  
+  .brutal-input {
+    @apply w-full px-4 py-3 text-lg;
+    border: 3px solid hsl(var(--charcoal));
+    background: hsl(var(--white));
+    transition: var(--brutal-transition);
+  }
+  
+  .brutal-input:focus {
+    outline: 4px solid hsl(var(--orange));
+    outline-offset: 2px;
+  }
+  
+  /* Hero Specific Styling */
+  .hero-bg {
+    background: linear-gradient(135deg, hsl(var(--navy)) 0%, hsl(225 65% 15%) 100%);
+    transform: skewY(-1.5deg);
+    transform-origin: top left;
+  }
+  
+  .hero-content {
+    transform: skewY(1.5deg);
+  }
+  
+  /* Animations */
+  @keyframes brutal-bounce {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-2px, -2px); }
+  }
+  
+  .animate-brutal-bounce {
+    animation: brutal-bounce 2s ease-in-out infinite;
   }
 }
