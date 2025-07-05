@@ -26,7 +26,7 @@ export default {
 			colors: {
 				/* OptiMAX-ai Brand Colors */
 				navy: 'hsl(225 55% 20%)',
-				orange: 'hsl(17 100% 60%)',
+				orange: 'hsl(28 100% 44%)', // Changed from 'hsl(17 100% 45yes %)' - this is #E67E00
 				'gray-light': 'hsl(210 20% 96%)',
 				charcoal: 'hsl(0 0% 4%)',
 				

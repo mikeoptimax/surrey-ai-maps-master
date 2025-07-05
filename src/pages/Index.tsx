@@ -207,7 +207,7 @@ const Index = () => {
               }
             ].map((study, index) => (
               <div key={index} className="bg-white p-8 border-l-6 border-orange">
-                <h4 className="font-bold text-lg mb-4">{study.business}</h4>
+                <h3 className="font-bold text-lg mb-4">{study.business}</h3>
                 <div className="space-y-2">
                   <div><strong>Before:</strong> {study.before}</div>
                   <div><strong>After:</strong> {study.after}</div>
@@ -313,19 +313,23 @@ const Index = () => {
                 onChange={(e) => setFormData({...formData, postcode: e.target.value})}
                 className="brutal-input"
               />
-              <select 
-                value={formData.serviceType}
-                onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
-                className="brutal-input"
-              >
-                <option value="">Service Type</option>
-                <option value="plumber">Plumber</option>
-                <option value="electrician">Electrician</option>
-                <option value="builder">Builder</option>
-                <option value="roofer">Roofer</option>
-                <option value="hvac">HVAC</option>
-                <option value="other">Other</option>
-              </select>
+              <div className="relative">
+                <label htmlFor="service-type" className="sr-only">Service Type</label>
+                <select 
+                  id="service-type"
+                  value={formData.serviceType}
+                  onChange={(e) => setFormData({...formData, serviceType: e.target.value})}
+                  className="brutal-input"
+                >
+                  <option value="">Service Type</option>
+                  <option value="plumber">Plumber</option>
+                  <option value="electrician">Electrician</option>
+                  <option value="builder">Builder</option>
+                  <option value="roofer">Roofer</option>
+                  <option value="hvac">HVAC</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
             </div>
             <Button type="submit" className="brutal-button text-xl px-12 py-6 bg-charcoal">
               Claim Your Area First
@@ -346,7 +350,7 @@ const Index = () => {
               <p>Ewell, Epsom, Surrey</p>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Services</h4>
+              <h3 className="font-bold mb-4">Services</h3>
               <div className="space-y-2">
                 <Link to="/services/seo-agency-surrey" className="block hover:text-orange">SEO Agency Surrey</Link>
                 <Link to="/services/google-business-profile-surrey" className="block hover:text-orange">Google Business Profile</Link>
@@ -355,7 +359,7 @@ const Index = () => {
               </div>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Industries</h4>
+              <h3 className="font-bold mb-4">Industries</h3>
               <div className="space-y-2">
                 <Link to="/industries/seo-for-plumbers" className="block hover:text-orange">SEO for Plumbers</Link>
                 <Link to="/industries/seo-for-electricians" className="block hover:text-orange">SEO for Electricians</Link>
@@ -365,7 +369,7 @@ const Index = () => {
               </div>
             </div>
             <div>
-              <h4 className="font-bold mb-4">Company</h4>
+              <h3 className="font-bold mb-4">Company</h3>
               <div className="space-y-2">
                 <Link to="/about" className="block hover:text-orange">About</Link>
                 <Link to="/case-studies" className="block hover:text-orange">Case Studies</Link>
