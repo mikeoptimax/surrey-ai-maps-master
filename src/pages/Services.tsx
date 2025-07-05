@@ -8,7 +8,7 @@ const Services = () => {
           OUR SEO SERVICES<br />
           FOR SURREY BUSINESSES
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {[
             {
               title: "SEO Agency Surrey",
@@ -29,11 +29,17 @@ const Services = () => {
               title: "AI-Powered Automation",
               description: "Automate your lead generation, review management, and customer workflows with AI.",
               link: "/services/ai-powered-automation"
+            },
+            {
+              title: "Marketing Strategy",
+              description: "Strategic marketing planning designed to accelerate Surrey business growth with AI insights.",
+              link: "/services/marketing-strategy"
             }
           ].map((service, index) => (
-            <Link key={index} to={service.link} className="brutal-card block">
-              <h2 className="headline-lg text-navy mb-4">{service.title}</h2>
+            <Link key={index} to={service.link} className="brutal-card block group hover:transform hover:-translate-y-1">
+              <h2 className="headline-lg text-navy mb-4 group-hover:text-orange transition-colors">{service.title}</h2>
               <p className="text-muted-foreground">{service.description}</p>
+              <div className="mt-4 text-orange font-bold">Learn More →</div>
             </Link>
           ))}
         </div>
