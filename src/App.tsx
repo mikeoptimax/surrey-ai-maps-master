@@ -12,6 +12,11 @@ import SEOAgencySurrey from "./pages/services/SEOAgencySurrey";
 import GoogleBusinessProfileSurrey from "./pages/services/GoogleBusinessProfileSurrey";
 import LocalSEOSurrey from "./pages/services/LocalSEOSurrey";
 import AIPoweredAutomation from "./pages/services/AIPoweredAutomation";
+import MarketingStrategy from "./pages/services/MarketingStrategy";
+import InternetMarketing from "./pages/services/InternetMarketing";
+import SEOConsultant from "./pages/services/SEOConsultant";
+import BusinessAutomation from "./pages/services/BusinessAutomation";
+import SEOWebDesign from "./pages/services/SEOWebDesign";
 
 // Industry Pages
 import Industries from "./pages/Industries";
@@ -54,6 +59,11 @@ const App = () => (
           <Route path="/services/google-business-profile-surrey" element={<GoogleBusinessProfileSurrey />} />
           <Route path="/services/local-seo-surrey" element={<LocalSEOSurrey />} />
           <Route path="/services/ai-powered-automation" element={<AIPoweredAutomation />} />
+          <Route path="/services/marketing-strategy" element={<MarketingStrategy />} />
+          <Route path="/services/internet-marketing-surrey" element={<InternetMarketing />} />
+          <Route path="/services/seo-consultant-surrey" element={<SEOConsultant />} />
+          <Route path="/services/business-automation-surrey" element={<BusinessAutomation />} />
+          <Route path="/services/seo-web-design-surrey" element={<SEOWebDesign />} />
           
           {/* Industry Routes */}
           <Route path="/industries" element={<Industries />} />
