@@ -3,9 +3,18 @@
   publish = "dist"
   command = "npm run build"
 
-# Enable prerendering for SEO
+# Environment variables
+[build.environment]
+  SKIP_PRERENDERING = "true"
+
+# Enable sitemap generation
 [[plugins]]
   package = "@netlify/plugin-sitemap"
+
+# Edge Function for SEO optimization
+[[edge_functions]]
+  path = "/*"
+  function = "bot-handler"
 
 # Headers for better performance
 [[headers]]
