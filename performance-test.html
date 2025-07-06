@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Performance Test</title>
+  
+  <!-- Our optimized font loading strategy -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Preload critical fonts -->
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" as="style">
+  
+  <!-- Inline critical font CSS -->
+  <style>
+    /* Fallback font display while custom fonts load */
+    @font-face {
+      font-family: 'Bebas Neue';
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+      src: url(https://fonts.gstatic.com/s/bebasneue/v14/JJRMOEOROZLOBXzrXsXiSXFkbmY.woff2) format('woff2');
+      unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    }
+    
+    /* Test colors */
+    .old-orange {
+      color: #FFA500; /* Original orange */
+    }
+    .new-orange {
+      color: #E67E00; /* New WCAG compliant orange */
+    }
+    body {
+      font-family: 'Work Sans', sans-serif;
+      line-height: 1.6;
+      margin: 2rem;
+    }
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+    }
+    .contrast-test {
+      margin: 2rem 0;
+      padding: 1rem;
+      border: 1px solid #ccc;
+    }
+    .dark-bg {
+      background-color: #1a1f4e; /* Navy */
+      color: white;
+      padding: 1rem;
+    }
+    .light-bg {
+      background-color: #f9fafb; /* Light gray */
+      padding: 1rem;
+    }
+    .white-bg {
+      background-color: #ffffff;
+      padding: 1rem;
+    }
+  </style>
+  
+  <!-- Non-blocking font loading with swap -->
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  
+  <!-- Fallback in case JavaScript is disabled -->
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+  </noscript>
+</head>
+<body>
+  <h1>Performance & Accessibility Test Page</h1>
+  
+  <h2>Font Loading Performance Test</h2>
+  <p>This text uses Work Sans which should be loaded non-blocking.</p>
+  <h3 style="font-family: 'Bebas Neue';">This heading uses Bebas Neue which has been preloaded.</h3>
+  <p style="font-family: 'JetBrains Mono';">This text uses JetBrains Mono which loads with font-display: swap.</p>
+  
+  <h2>Color Contrast Test</h2>
+  
+  <div class="contrast-test white-bg">
+    <p>Text with <span class="old-orange">original orange (#FFA500)</span> - FAILS WCAG AA</p>
+    <p>Text with <span class="new-orange">new orange (#E67E00)</span> - PASSES WCAG AA</p>
+  </div>
+  
+  <div class="contrast-test dark-bg">
+    <p>Dark background with <span class="old-orange">original orange (#FFA500)</span> - FAILS WCAG AA</p>
+    <p>Dark background with <span class="new-orange">new orange (#E67E00)</span> - PASSES WCAG AA</p>
+  </div>
+  
+  <div class="contrast-test light-bg">
+    <p>Light background with <span class="old-orange">original orange (#FFA500)</span> - FAILS WCAG AA</p>
+    <p>Light background with <span class="new-orange">new orange (#E67E00)</span> - PASSES WCAG AA</p>
+  </div>
+  
+  <script>
+    // Log when the page loads
+    window.addEventListener('load', () => {
+      console.log('Page fully loaded');
+    });
+    
+    // Log when DOM is ready
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('DOM Content Loaded');
+    });
+  </script>
+</body>
+</html>

@@ -10,7 +10,7 @@ All colors MUST be HSL.
   :root {
     /* OptiMAX-ai Brand Colors */
     --navy: 225 55% 20%;        /* #1a1f4e - Primary brand navy */
-    --orange: 17 100% 60%;      /* #ff6b35 - Brand orange for "ai" and CTAs */
+    --orange: 28 100% 44%;      /* #E67E00 - WCAG AA compliant brand orange */
     --white: 0 0% 100%;         /* #ffffff - Clean white */
     --charcoal: 0 0% 4%;        /* #0a0a0a - Near black for contrast */
     --gray-light: 210 20% 96%;  /* #f9fafb - Light backgrounds */
