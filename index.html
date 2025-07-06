@@ -979,6 +979,18 @@
   </head>
 
   <body>
+    <!-- Emergency SEO CSS - Hidden from users but visible to crawlers -->
+    <style>
+      #seo-content {
+        position: absolute !important;
+        left: -10000px !important;
+        width: 1px !important;
+        height: 1px !important;
+        overflow: hidden !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+      }
+    </style>
     <!-- This root div will be populated by React in browser environments -->
     <div id="root">
       <!-- Minimal static content for SSR and SEO that will be replaced on hydration -->
@@ -991,6 +1003,38 @@
         </noscript>
       </div>
     </div>
+    <!-- Emergency SEO Content - Hidden from users but visible to crawlers -->
+    <div id="seo-content" style="position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; overflow: hidden !important;">
+      <h1>OptiMAX-ai - SEO Agency Surrey | Google Business Profile Optimization</h1>
+      <h2>Surrey's Premier SEO Company - Get #1 on Google Maps in 90 Days</h2>
+      
+      <div itemscope itemtype="https://schema.org/LocalBusiness">
+        <h3 itemprop="name">Optimax Ai</h3>
+        <p itemprop="description">OptiMAX-ai is Surrey's leading SEO agency specializing in Google Business Profile optimization and local SEO services.</p>
+        <div itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
+          <span itemprop="streetAddress">38 Sunnymede Avenue</span>
+          <span itemprop="addressLocality">West Ewell</span>
+          <span itemprop="addressRegion">Surrey</span>
+          <span itemprop="postalCode">KT19 9TJ</span>
+        </div>
+        <p>Phone: <span itemprop="telephone">07867 075691</span></p>
+      </div>
+      
+      <h3>Our SEO Services in Surrey</h3>
+      <ul>
+        <li>Google Business Profile Optimization - £497/month</li>
+        <li>Local SEO Services - £697/month</li>
+        <li>Enterprise SEO - £1,200/month</li>
+        <li>AI Marketing Automation - £997-2,500/month</li>
+      </ul>
+      
+      <h3>Service Areas</h3>
+      <p>Epsom, Guildford, Woking, Redhill, Camberley, Reigate, Farnham, Dorking, Leatherhead, Walton-on-Thames, Esher, Cobham, and all Surrey locations.</p>
+      
+      <h3>Why Choose OptiMAX-ai</h3>
+      <p>Unlike traditional SEO agencies in Surrey, we guarantee top 3 Google Maps rankings within 90 days. Our AI-powered approach delivers real phone calls and leads, not just rankings.</p>
+    </div>
+
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
