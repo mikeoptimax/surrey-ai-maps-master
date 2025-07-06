@@ -5,6 +5,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 
+// Flag to identify if we're in browser environment
+const isBrowser = typeof window !== 'undefined';
+
 // Core components - loaded eagerly
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
@@ -59,12 +62,14 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        {/* Route change listener for preloading components */}
-        <RouteChangeListener />
-        <ErrorBoundary>
-          <Suspense fallback={<PageLoader />}>
-            <Routes>
+      {/* Only use BrowserRouter in browser environments */}
+      {isBrowser ? (
+        <BrowserRouter>
+          {/* Route change listener for preloading components */}
+          <RouteChangeListener />
+          <ErrorBoundary>
+            <Suspense fallback={<PageLoader />}>
+              <Routes>
             {/* Home and Not Found - eagerly loaded */}
             <Route path="/" element={<Index />} />
             
@@ -106,10 +111,18 @@ const App = () => (
             
             {/* Catch-all route */}
             <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Suspense>
-        </ErrorBoundary>
-      </BrowserRouter>
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+        </BrowserRouter>
+      ) : (
+        /* Static placeholder content for SSR that will be replaced on hydration */
+        <div id="root-static">
+          {/* Minimal static content for SEO */}
+          <h1>OptiMAX-ai - Surrey's SEO Agency</h1>
+          <p>We're the only SEO company in Surrey that guarantees top 3 Google Maps rankings in 90 days.</p>
+        </div>
+      )}
     </TooltipProvider>
   </QueryClientProvider>
 );

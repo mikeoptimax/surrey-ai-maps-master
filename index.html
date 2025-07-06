@@ -979,7 +979,18 @@
   </head>
 
   <body>
-    <div id="root"></div>
+    <!-- This root div will be populated by React in browser environments -->
+    <div id="root">
+      <!-- Minimal static content for SSR and SEO that will be replaced on hydration -->
+      <div id="root-static" style="display: none">
+        <h1>OptiMAX-ai - Surrey's SEO Agency</h1>
+        <p>We're the only SEO company in Surrey that guarantees top 3 Google Maps rankings in 90 days.</p>
+        <p>Our AI-powered SEO services deliver real leads, not just rankings.</p>
+        <noscript>
+          <style>#root-static { display: block !important; }</style>
+        </noscript>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

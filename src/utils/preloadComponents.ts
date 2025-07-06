@@ -3,6 +3,9 @@
  * @param componentImports - Array of import functions for React.lazy components
  */
 export const preloadComponents = (componentImports: (() => Promise<any>)[]) => {
+  // Skip preloading in non-browser environments
+  if (typeof window === 'undefined') return;
+
   componentImports.forEach(importFn => {
     // Start loading the chunk in the background
     importFn();
@@ -14,6 +17,9 @@ export const preloadComponents = (componentImports: (() => Promise<any>)[]) => {
  * to be visited next based on the current route
  */
 export const preloadRelatedComponents = (routePath: string) => {
+  // Skip preloading in non-browser environments
+  if (typeof window === 'undefined') return;
+  
   // Service pages preloading
   if (routePath === '/services') {
     preloadComponents([

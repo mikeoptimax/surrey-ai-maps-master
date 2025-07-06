@@ -39,8 +39,12 @@ class ErrorBoundary extends Component<Props, State> {
             <p className="text-sm text-gray-500 mb-4">
               Error details: {this.state.error?.message || "Unknown error"}
             </p>
-            <button 
-              onClick={() => window.location.reload()}
+            <button
+              onClick={() => {
+                if (typeof window !== 'undefined') {
+                  window.location.reload();
+                }
+              }}
               className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
             >
               Refresh Page

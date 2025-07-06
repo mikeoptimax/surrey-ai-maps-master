@@ -53,10 +53,14 @@ interface State {
   toasts: ToasterToast[]
 }
 
-const toastTimeouts = new Map<string, ReturnType<typeof setTimeout>>()
+// Only initialize this map in browser environments
+const toastTimeouts = typeof window !== 'undefined'
+  ? new Map<string, ReturnType<typeof setTimeout>>()
+  : new Map<string, any>()
 
 const addToRemoveQueue = (toastId: string) => {
-  if (toastTimeouts.has(toastId)) {
+  // Skip if we're not in a browser or if toast is already in removal queue
+  if (typeof window === 'undefined' || toastTimeouts.has(toastId)) {
     return
   }
 
