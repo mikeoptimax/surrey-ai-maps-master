@@ -20,8 +20,12 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
+      {/* Urgency Banner */}
+      <div className="bg-orange text-white py-2 text-center font-semibold text-sm md:text-base sticky top-0 z-50">
+        🚀 Limited Time: Founding Client Rates - Only 7 Spots Left for August - Save £200/month
+      </div>
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white z-50 border-b-2 border-charcoal">
+      <nav className="fixed top-8 left-0 right-0 bg-white z-40 border-b-2 border-charcoal">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <Link href="/" className="text-2xl font-bold">
@@ -44,32 +48,56 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="hero-bg min-h-screen flex items-center justify-center pt-32">
+      <section className="hero-bg min-h-screen flex items-center justify-center pt-40">
         <div className="hero-content container mx-auto px-4 pt-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-8">
-              <h1 className="headline-giant text-white mb-8">
-                <span className="block">SURREY&apos;S SEO AGENCY</span>
-                <span className="block text-orange text-[180px]">GETS YOU #1</span>
-                <span className="block">ON GOOGLE MAPS</span>
+              <h1 className="headline-giant text-white mb-4">
+                <span className="block">Get 3X More Customers</span>
+                <span className="block text-orange">with Surrey&apos;s</span>
+                <span className="block">First AI-Powered SEO</span>
               </h1>
+              <h2 className="text-2xl text-white/90 mb-6 max-w-2xl font-medium">
+                While others promise rankings, we deliver real customers to your business
+              </h2>
+              <div className="flex flex-wrap gap-6 mb-8">
+                <div className="flex items-center">
+                  <span className="text-orange mr-2">✓</span>
+                  <span className="text-white text-sm">27 Surrey Businesses Transformed</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-orange mr-2">✓</span>
+                  <span className="text-white text-sm">Average 312% More Customers</span>
+                </div>
+                <div className="flex items-center">
+                  <span className="text-orange mr-2">✓</span>
+                  <span className="text-white text-sm">Results You Can Track Daily</span>
+                </div>
+              </div>
               <p className="text-xl text-white/70 mb-12 max-w-2xl leading-relaxed">
-                Looking for an SEO agency Surrey businesses trust? We&apos;re the only SEO company 
-                in Surrey that guarantees top 3 Google Maps rankings in 90 days. We focus on 
+                Looking for an SEO agency Surrey businesses trust? We&apos;re the only SEO company
+                in Surrey that guarantees top 3 Google Maps rankings in 90 days. We focus on
                 what drives calls - not blogs, not backlinks - real local visibility.
               </p>
               <Button className="brutal-button text-xl px-12 py-6">
                 Get Your Free GMB Audit → See Who&apos;s Beating You
               </Button>
+              <p className="text-sm text-white/70 mt-4 max-w-md">
+                See exactly how we&apos;ll grow your business - no fluff, no jargon
+              </p>
             </div>
             <div className="lg:col-span-4 text-white text-right">
               <div className="space-y-8">
                 <div>
-                  <div className="data-mono text-4xl font-bold text-orange">+312%</div>
-                  <div className="text-lg">Average Lead Increase</div>
+                  <div className="data-mono text-4xl font-bold text-orange">GETS YOU 3X MORE</div>
+                  <div className="data-mono text-3xl font-bold text-white">CUSTOMERS</div>
                 </div>
                 <div>
-                  <div className="text-xl font-bold">Surrey&apos;s AI SEO Specialists</div>
+                  <div className="data-mono text-4xl font-bold text-orange">+312%</div>
+                  <div className="text-lg">More Customers for Our Clients</div>
+                </div>
+                <div>
+                  <div className="text-xl font-bold">Surrey&apos;s First AI-Powered SEO Agency</div>
                 </div>
                 <div>
                   <div className="data-mono text-2xl">5.0★ Google Rating</div>
@@ -126,54 +154,109 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
-                title: "GMB-FOCUSED SEO",
+                title: "QUICK WINS",
+                subtitle: "For Solo Trades & Small Teams",
                 features: [
-                  "Complete Google Business Profile overhaul",
-                  "Local keyword optimization", 
-                  "Review generation system",
-                  "Competitor tracking"
+                  "Fix why you're invisible on Google Maps",
+                  "Get your phone ringing within 30 days",
+                  "Rank above competitors for '[trade] near me'",
+                  "Turn on review collection (build trust fast)",
+                  "Weekly ranking reports you understand"
                 ],
-                price: "£497/month"
+                outcomes: "Expect 5-10 more calls per week",
+                idealFor: "Solo plumbers, electricians, handymen who need steady local work",
+                price: "£697/month",
+                tag: "Most Popular"
               },
               {
-                title: "LOCAL SEO COMPLETE",
+                title: "MARKET LEADER",
+                subtitle: "For Growing Teams (2-5 vans)",
                 features: [
-                  "Everything in GMB-Focused",
-                  "50+ local citations",
-                  "NAP consistency audit",
-                  "Schema markup"
+                  "Everything in Quick Wins PLUS:",
+                  "Dominate multiple postcodes",
+                  "24/7 emergency search visibility",
+                  "Automated quote requests",
+                  "Competitor conquest campaigns"
                 ],
-                price: "£697/month"
+                outcomes: "Expect 20-30 quality leads per week",
+                idealFor: "Established trades ready to expand territory and hire more staff",
+                price: "£997/month",
+                tag: "Best Value"
               },
               {
-                title: "ENTERPRISE SEO",
+                title: "DOMINATE SURREY",
+                subtitle: "For Established Businesses",
                 features: [
-                  "Full SEO agency Surrey services",
-                  "Multi-location management",
-                  "AI-powered content",
-                  "White-glove service"
+                  "Complete digital transformation",
+                  "Multi-location/service domination",
+                  "AI-powered content at scale",
+                  "Sales team integration",
+                  "Dedicated account strategist"
                 ],
-                price: "£1,200/month"
+                outcomes: "Become the obvious choice in your market",
+                idealFor: "5+ van operations, professional services, medical practices",
+                price: "£2,997/month",
+                tag: "White Glove"
               },
               {
-                title: "AI AUTOMATION",
+                title: "FULL AI TRANSFORMATION",
+                subtitle: "Complete Business Automation",
                 features: [
-                  "Lead automation",
-                  "Review management",
-                  "Workflow optimization",
-                  "Custom n8n solutions"
+                  "Everything in Dominate Surrey PLUS:",
+                  "24/7 AI customer service",
+                  "Intelligent lead scoring & routing",
+                  "Automated job scheduling",
+                  "Revenue optimization AI",
+                  "Custom automation workflows"
                 ],
-                price: "£997-2,500/month"
+                outcomes: "Run your business on autopilot while growing 50% YoY",
+                idealFor: "Ambitious businesses ready to leap ahead with AI",
+                price: "£4,997/month",
+                tag: "Innovation Leader"
               }
             ].map((service, index) => (
-              <div key={index} className="brutal-card">
-                <h3 className="headline-lg text-navy mb-6">{service.title}</h3>
-                <ul className="space-y-3 mb-8">
-                  {service.features.map((feature, idx) => (
-                    <li key={idx} className="text-sm">• {feature}</li>
-                  ))}
-                </ul>
-                <div className="data-mono text-xl font-bold text-orange">{service.price}</div>
+              <div key={index} className="brutal-card relative flex flex-col h-full">
+                {service.tag && (
+                  <span className="absolute top-4 right-4 bg-orange text-white px-3 py-1 text-sm font-bold rounded z-10">
+                    {service.tag}
+                  </span>
+                )}
+                
+                {/* Fixed height top section */}
+                <div className="mb-4">
+                  <h3 className="headline-lg text-navy mb-2 pr-32 min-h-[80px] flex items-start">{service.title}</h3>
+                  <p className="text-sm font-semibold text-gray-600 h-6">{service.subtitle}</p>
+                </div>
+                
+                {/* Flexible middle section */}
+                <div className="flex-grow">
+                  <ul className="space-y-3 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="text-sm flex items-start">
+                        <span className="text-orange mr-2 flex-shrink-0">✓</span>
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Fixed height bottom section */}
+                <div>
+                  <div className="border-t pt-4 mb-4">
+                    <p className="text-sm font-semibold text-navy mb-2">Expected Results:</p>
+                    <p className="text-sm text-gray-700 h-10">{service.outcomes}</p>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <p className="text-sm font-semibold text-navy mb-2">Perfect For:</p>
+                    <p className="text-sm text-gray-700 h-20">{service.idealFor}</p>
+                  </div>
+                  
+                  <div className="pt-4 border-t">
+                    <div className="data-mono text-xl font-bold text-orange">{service.price}</div>
+                    <p className="text-sm text-gray-600 mt-2 h-10">Founding Client Rate - Save £200/month</p>
+                  </div>
+                </div>
               </div>
             ))}
           </div>

@@ -47,9 +47,9 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             <div className="lg:col-span-8">
               <h1 className="headline-giant text-white mb-8">
-                <span className="block">SURREY'S SEO AGENCY</span>
-                <span className="block text-orange text-[180px]">GETS YOU #1</span>
-                <span className="block">ON GOOGLE MAPS</span>
+                <span className="block">Get 3X More Customers</span>
+                <span className="block text-orange">with Surrey's</span>
+                <span className="block">First AI-Powered SEO</span>
               </h1>
               <p className="text-xl text-white/70 mb-12 max-w-2xl leading-relaxed">
                 Looking for an SEO agency Surrey businesses trust? We're the only SEO company 

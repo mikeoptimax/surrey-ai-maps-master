@@ -1,25 +1,67 @@
 {
   "pages": {
-    "/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/page.js"
-    ],
-    "/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/layout.css",
-      "static/chunks/app/layout.js"
-    ],
     "/not-found": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/not-found.js"
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/not-found-93e3ad22a94393c0.js"
     ],
     "/_not-found/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/app/_not-found/page-c1bbe1b4bc8170a6.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/css/c653114045e2c334.css",
+      "static/chunks/app/layout-e22fa2bb2ce5176f.js"
+    ],
+    "/page": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/page-a0b509a1d265e6ca.js"
+    ],
+    "/areas/seo-guildford/page": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/areas/seo-guildford/page-0342272397350011.js"
+    ],
+    "/services/page": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/services/page-28718a93112f0258.js"
+    ],
+    "/services/seo-agency-surrey/page": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/services/seo-agency-surrey/page-061223154ee3e043.js"
+    ],
+    "/industries/seo-for-plumbers/page": [
+      "static/chunks/webpack-fa9abe9475c7e342.js",
+      "static/chunks/fd9d1056-b14130bb1ce7c376.js",
+      "static/chunks/117-567965ef1733efb6.js",
+      "static/chunks/main-app-5fa4e67920dd2a9e.js",
+      "static/chunks/309-09b71df4262a6d94.js",
+      "static/chunks/app/industries/seo-for-plumbers/page-9c39717584ce7952.js"
     ]
   }
 }
