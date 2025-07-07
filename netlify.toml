@@ -1,17 +1,14 @@
-# Build settings for Next.js in subfolder
 [build]
   base = "nextjs-migration"
   command = "npm install --force && npm run build"
   publish = ".next"
 
-# Add Next.js plugin
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
-# Headers for better performance
 [[headers]]
   for = "/*"
   [headers.values]
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff""# Force rebuild" 
+    X-Content-Type-Options = "nosniff"
