@@ -1,0 +1,7 @@
+{
+  // Suppress warnings about Tailwind-specific at-rules that the default CSS language server does not recognise
+  "css.lint.unknownAtRules": "ignore",
+  "postcss.lint.unknownAtRules": "ignore",
+  "scss.lint.unknownAtRules": "ignore",
+  "less.lint.unknownAtRules": "ignore"
+}
