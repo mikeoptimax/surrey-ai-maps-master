@@ -1,20 +1,12 @@
-# Build settings
+# Build settings for Next.js in subfolder
 [build]
-  publish = "dist"
+  base = "nextjs-migration"
   command = "npm run build"
+  publish = ".next"
 
-# Environment variables
-[build.environment]
-  SKIP_PRERENDERING = "true"
-
-# Enable sitemap generation
+# Add Next.js plugin
 [[plugins]]
-  package = "@netlify/plugin-sitemap"
-
-# Edge Function for SEO optimization
-[[edge_functions]]
-  path = "/*"
-  function = "bot-handler"
+  package = "@netlify/plugin-nextjs"
 
 # Headers for better performance
 [[headers]]
@@ -23,9 +15,3 @@
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"
-
-# Redirects for client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
