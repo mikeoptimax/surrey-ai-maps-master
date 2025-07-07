@@ -1,7 +1,7 @@
 # Build settings for Next.js in subfolder
 [build]
   base = "nextjs-migration"
-  command = "npm run build"
+  command = "npm install --force && npm run build"
   publish = ".next"
 
 # Add Next.js plugin
