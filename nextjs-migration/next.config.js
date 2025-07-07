@@ -1,9 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
   reactStrictMode: true,
   swcMinify: true,
   images: {
     domains: ['optimax-ai.com'],
+    unoptimized: true  // Required for static export
   },
   // Preserve the existing URL structure
   async redirects() {
