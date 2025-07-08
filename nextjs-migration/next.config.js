@@ -1,7 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // Temporarily removing static export to test dynamic rendering
-  // output: 'export',
+  output: 'export',  // Uncomment this line!
   reactStrictMode: true,
   swcMinify: true,
   images: {
