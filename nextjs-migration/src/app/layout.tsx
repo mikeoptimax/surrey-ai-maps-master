@@ -1,16 +1,16 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { businessSchema, websiteSchema, faqSchema, serviceAreaSchema } from '@/lib/schema'
+import { businessSchema, websiteSchema, faqSchema, serviceAreaSchema, breadcrumbSchema, organizationSchema, aggregateRatingSchema } from '@/lib/schema'
 import { BotContent } from '@/components/seo/bot-content'
 
 export const metadata: Metadata = {
-  title: 'SEO Agency Surrey | AI Google Business Profile Optimization | OptiMAX-ai',
-  description: 'Surrey\'s SEO agency specializing in Google Business Profiles. Our AI-powered SEO services Surrey businesses trust deliver real leads, not just rankings. First month £297.',
+  title: 'SEO Agency Surrey | Google Maps Rankings in 90 Days | OptiMAX-ai',
+  description: 'Surrey SEO agency guaranteeing top 3 Google Maps rankings. Get 3X more customers with AI-powered local SEO. Trusted by 27 Surrey businesses. Call 07867075691',
   metadataBase: new URL('https://optimax-ai.com'),
   openGraph: {
-    title: 'SEO Agency Surrey | AI Google Business Profile Optimization | OptiMAX-ai',
-    description: 'Surrey\'s SEO agency specializing in Google Business Profiles. Our AI-powered SEO services Surrey businesses trust deliver real leads, not just rankings. First month £297.',
+    title: 'SEO Agency Surrey | Google Maps Rankings in 90 Days | OptiMAX-ai',
+    description: 'Surrey SEO agency guaranteeing top 3 Google Maps rankings. Get 3X more customers with AI-powered local SEO. Trusted by 27 Surrey businesses. Call 07867075691',
     type: 'website',
     images: ['/og-image.jpg'],
   },
@@ -33,6 +33,9 @@ export const metadata: Metadata = {
     'website': JSON.stringify(websiteSchema),
     'faq': JSON.stringify(faqSchema),
     'service': JSON.stringify(serviceAreaSchema),
+    'breadcrumb': JSON.stringify(breadcrumbSchema),
+    'organization': JSON.stringify(organizationSchema),
+    'rating': JSON.stringify(aggregateRatingSchema),
   }
 }
 
@@ -103,6 +106,18 @@ export default function RootLayout({
         <script 
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceAreaSchema) }}
+        />
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        />
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script 
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(aggregateRatingSchema) }}
         />
       </head>
       <body className={`${workSans.variable}`}>

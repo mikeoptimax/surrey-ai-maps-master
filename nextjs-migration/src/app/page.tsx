@@ -13,31 +13,8 @@ export default function Home() {
     serviceType: ""
   })
 
-  useEffect(() => {
-    console.log('Form data updated:', formData)
-  }, [formData])
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    alert('Form submitted!')
-    
-    console.log('=== FORM SUBMISSION DEBUG ===')
-    console.log('Form submitted with data:', formData)
-    console.log('All fields filled?', {
-      businessName: !!formData.businessName,
-      phone: !!formData.phone,
-      postcode: !!formData.postcode,
-      serviceType: !!formData.serviceType
-    })
-    
-    // DEBUG: Check what's in formData
-    console.log('Form data state:', formData)
-    console.log('Form fields:', {
-      businessName: formData.businessName || 'EMPTY',
-      phone: formData.phone || 'EMPTY',
-      postcode: formData.postcode || 'EMPTY',
-      serviceType: formData.serviceType || 'EMPTY'
-    })
     
     const dataToSend = {
       businessName: formData.businessName || '',
@@ -49,8 +26,6 @@ export default function Home() {
       url: typeof window !== 'undefined' ? window.location.href : ''
     }
     
-    console.log('Sending to n8n:', dataToSend)
-    
     // Store locally for user experience
     if (typeof window !== 'undefined') {
       localStorage.setItem('leadFormData', JSON.stringify(formData))
@@ -58,14 +33,6 @@ export default function Home() {
     
     // Send to n8n webhook
     try {
-      console.log('About to send this data to n8n:')
-      console.log(JSON.stringify({
-        ...formData,
-        timestamp: new Date().toISOString(),
-        source: 'optimax-homepage',
-        url: window.location.href
-      }, null, 2))
-      
       const response = await fetch('https://optimax-ai.onrender.com/webhook/optimax-leads', {
         method: 'POST',
         headers: {
@@ -74,9 +41,7 @@ export default function Home() {
         body: JSON.stringify(dataToSend)
       })
       
-      console.log('n8n webhook response status:', response.status)
       const responseData = await response.json()
-      console.log('Response data:', responseData)
       
       if (response.ok) {
         // Success - redirect to booking
@@ -85,7 +50,6 @@ export default function Home() {
         throw new Error('Webhook failed')
       }
     } catch (error) {
-      console.error('Failed to send to n8n:', error)
       // Still redirect even if webhook fails
       window.location.href = '/book-call'
     }
@@ -96,35 +60,6 @@ export default function Home() {
       {/* Urgency Banner */}
       <div className="bg-orange text-white py-2 text-center font-semibold text-sm md:text-base sticky top-0 z-50">
         🚀 Limited Time: Founding Client Rates - Only 7 Spots Left for August - Save £200/month
-      </div>
-      
-      {/* TEST FORM - DELETE AFTER TESTING */}
-      <div className="bg-red-500 text-white p-4">
-        <h3>TEST FORM</h3>
-        <input
-          type="text"
-          placeholder="Test input"
-          className="text-black p-2 mr-2"
-          id="test-input"
-        />
-        <button
-          onClick={() => {
-            const input = document.getElementById('test-input') as HTMLInputElement;
-            alert('You typed: ' + input.value);
-            
-            // Try to send to n8n
-            fetch('https://optimax-ai.onrender.com/webhook/optimax-leads', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ test: input.value, timestamp: new Date().toISOString() })
-            })
-            .then(() => alert('Sent to n8n!'))
-            .catch(err => alert('Error: ' + err));
-          }}
-          className="bg-black text-white p-2"
-        >
-          TEST SEND
-        </button>
       </div>
       
       {/* Navigation */}
@@ -521,7 +456,6 @@ export default function Home() {
                 placeholder="Business Name"
                 value={formData.businessName}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  console.log('Business name changing to:', e.target.value)
                   setFormData({...formData, businessName: e.target.value})
                 }}
                 className="brutal-input"

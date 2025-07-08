@@ -128,18 +128,6 @@ export const breadcrumbSchema = {
       "position": 1,
       "name": "Home",
       "item": "https://optimax-ai.com"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "SEO Services Surrey",
-      "item": "https://optimax-ai.com/services"
-    },
-    {
-      "@type": "ListItem",
-      "position": 3,
-      "name": "Google Business Profile Optimization",
-      "item": "https://optimax-ai.com/services/google-business-profile-surrey"
     }
   ]
 };
@@ -161,6 +149,41 @@ export const websiteSchema = {
   "publisher": {
     "@id": "https://optimax-ai.com/#business"
   }
+};
+
+export const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "@id": "https://optimax-ai.com/#organization",
+  "name": "OptiMAX-ai",
+  "url": "https://optimax-ai.com",
+  "logo": "https://optimax-ai.com/logo.png",
+  "sameAs": [
+    "https://www.facebook.com/optimaxai",
+    "https://twitter.com/optimaxai",
+    "https://www.linkedin.com/company/optimax-ai"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+447867075691",
+    "contactType": "sales",
+    "areaServed": "GB",
+    "availableLanguage": "English"
+  }
+};
+
+export const aggregateRatingSchema = {
+  "@context": "https://schema.org",
+  "@type": "AggregateRating",
+  "itemReviewed": {
+    "@type": "ProfessionalService",
+    "@id": "https://optimax-ai.com/#business"
+  },
+  "ratingValue": "5.0",
+  "bestRating": "5",
+  "worstRating": "1",
+  "ratingCount": "27",
+  "reviewCount": "27"
 };
 
 // Function to generate schema for service areas
