@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -13,9 +13,82 @@ export default function Home() {
     serviceType: ""
   })
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    console.log('Form data updated:', formData)
+  }, [formData])
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log("Form submitted:", formData)
+    alert('Form submitted!')
+    
+    console.log('=== FORM SUBMISSION DEBUG ===')
+    console.log('Form submitted with data:', formData)
+    console.log('All fields filled?', {
+      businessName: !!formData.businessName,
+      phone: !!formData.phone,
+      postcode: !!formData.postcode,
+      serviceType: !!formData.serviceType
+    })
+    
+    // DEBUG: Check what's in formData
+    console.log('Form data state:', formData)
+    console.log('Form fields:', {
+      businessName: formData.businessName || 'EMPTY',
+      phone: formData.phone || 'EMPTY',
+      postcode: formData.postcode || 'EMPTY',
+      serviceType: formData.serviceType || 'EMPTY'
+    })
+    
+    const dataToSend = {
+      businessName: formData.businessName || '',
+      phone: formData.phone || '',
+      postcode: formData.postcode || '',
+      serviceType: formData.serviceType || '',
+      timestamp: new Date().toISOString(),
+      source: 'optimax-homepage',
+      url: typeof window !== 'undefined' ? window.location.href : ''
+    }
+    
+    console.log('Sending to n8n:', dataToSend)
+    
+    // Store locally for user experience
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('leadFormData', JSON.stringify(formData))
+    }
+    
+    // Send to n8n webhook
+    try {
+      console.log('About to send this data to n8n:')
+      console.log(JSON.stringify({
+        ...formData,
+        timestamp: new Date().toISOString(),
+        source: 'optimax-homepage',
+        url: window.location.href
+      }, null, 2))
+      
+      const response = await fetch('https://optimax-ai.onrender.com/webhook/optimax-leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(dataToSend)
+      })
+      
+      console.log('n8n webhook response status:', response.status)
+      const responseData = await response.json()
+      console.log('Response data:', responseData)
+      
+      if (response.ok) {
+        // Success - redirect to booking
+        window.location.href = '/book-call'
+      } else {
+        throw new Error('Webhook failed')
+      }
+    } catch (error) {
+      console.error('Failed to send to n8n:', error)
+      // Still redirect even if webhook fails
+      window.location.href = '/book-call'
+    }
   }
 
   return (
@@ -24,6 +97,36 @@ export default function Home() {
       <div className="bg-orange text-white py-2 text-center font-semibold text-sm md:text-base sticky top-0 z-50">
         🚀 Limited Time: Founding Client Rates - Only 7 Spots Left for August - Save £200/month
       </div>
+      
+      {/* TEST FORM - DELETE AFTER TESTING */}
+      <div className="bg-red-500 text-white p-4">
+        <h3>TEST FORM</h3>
+        <input
+          type="text"
+          placeholder="Test input"
+          className="text-black p-2 mr-2"
+          id="test-input"
+        />
+        <button
+          onClick={() => {
+            const input = document.getElementById('test-input') as HTMLInputElement;
+            alert('You typed: ' + input.value);
+            
+            // Try to send to n8n
+            fetch('https://optimax-ai.onrender.com/webhook/optimax-leads', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ test: input.value, timestamp: new Date().toISOString() })
+            })
+            .then(() => alert('Sent to n8n!'))
+            .catch(err => alert('Error: ' + err));
+          }}
+          className="bg-black text-white p-2"
+        >
+          TEST SEND
+        </button>
+      </div>
+      
       {/* Navigation */}
       <nav className="fixed top-8 left-0 right-0 bg-white z-40 border-b-2 border-charcoal">
         <div className="container mx-auto px-4 py-4">
@@ -38,10 +141,13 @@ export default function Home() {
               <Link href="/about" className="hover:text-orange transition-colors">About</Link>
               <Link href="/case-studies" className="hover:text-orange transition-colors">Case Studies</Link>
               <Link href="/contact" className="hover:text-orange transition-colors">Contact</Link>
+              <Link href="/book-call" className="hover:text-orange transition-colors font-semibold">Book a Call</Link>
             </div>
             <div className="flex items-center space-x-4">
               <span className="data-mono text-sm">07867 075691</span>
-              <Button className="brutal-button">Get Free Audit</Button>
+              <Link href="/book-call">
+                <Button className="brutal-button">Get Your Free Analysis →</Button>
+              </Link>
             </div>
           </div>
         </div>
@@ -79,9 +185,11 @@ export default function Home() {
                 in Surrey that guarantees top 3 Google Maps rankings in 90 days. We focus on
                 what drives calls - not blogs, not backlinks - real local visibility.
               </p>
-              <Button className="brutal-button text-xl px-12 py-6">
-                Get Your Free GMB Audit → See Who&apos;s Beating You
-              </Button>
+              <Link href="/book-call">
+                <Button className="brutal-button text-xl px-12 py-6">
+                  Get Your Free GMB Audit → See Who&apos;s Beating You
+                </Button>
+              </Link>
               <p className="text-sm text-white/70 mt-4 max-w-md">
                 See exactly how we&apos;ll grow your business - no fluff, no jargon
               </p>
@@ -255,6 +363,34 @@ export default function Home() {
                   <div className="pt-4 border-t">
                     <div className="data-mono text-xl font-bold text-orange">{service.price}</div>
                     <p className="text-sm text-gray-600 mt-2 h-10">Founding Client Rate - Save £200/month</p>
+                    {index === 0 && (
+                      <Link href="/book-call" className="block mt-6">
+                        <Button className="brutal-button w-full py-3">
+                          Start →
+                        </Button>
+                      </Link>
+                    )}
+                    {index === 1 && (
+                      <Link href="/book-call" className="block mt-6">
+                        <Button className="brutal-button w-full py-3">
+                          Dominate →
+                        </Button>
+                      </Link>
+                    )}
+                    {index === 2 && (
+                      <Link href="/book-call" className="block mt-6">
+                        <Button className="brutal-button bg-navy border-2 border-orange text-white w-full py-3">
+                          Strategy →
+                        </Button>
+                      </Link>
+                    )}
+                    {index === 3 && (
+                      <Link href="/book-call" className="block mt-6">
+                        <Button className="brutal-button bg-orange w-full py-3">
+                          AI →
+                        </Button>
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>
@@ -380,31 +516,42 @@ export default function Home() {
           </p>
           <form onSubmit={handleSubmit} className="max-w-2xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-              <Input 
+              <Input
+                name="businessName"
                 placeholder="Business Name"
                 value={formData.businessName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, businessName: e.target.value})}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  console.log('Business name changing to:', e.target.value)
+                  setFormData({...formData, businessName: e.target.value})
+                }}
                 className="brutal-input"
+                required
               />
-              <Input 
+              <Input
+                name="phone"
                 placeholder="Phone"
                 value={formData.phone}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, phone: e.target.value})}
                 className="brutal-input"
+                required
               />
-              <Input 
+              <Input
+                name="postcode"
                 placeholder="Postcode"
                 value={formData.postcode}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => setFormData({...formData, postcode: e.target.value})}
                 className="brutal-input"
+                required
               />
               <div className="relative">
                 <label htmlFor="service-type" className="sr-only">Service Type</label>
-                <select 
+                <select
+                  name="serviceType"
                   id="service-type"
                   value={formData.serviceType}
                   onChange={(e: React.ChangeEvent<HTMLSelectElement>) => setFormData({...formData, serviceType: e.target.value})}
                   className="brutal-input"
+                  required
                 >
                   <option value="">Service Type</option>
                   <option value="plumber">Plumber</option>
@@ -416,9 +563,12 @@ export default function Home() {
                 </select>
               </div>
             </div>
-            <Button type="submit" className="brutal-button text-xl px-12 py-6 bg-charcoal">
+            <button
+              type="submit"
+              className="brutal-button text-xl px-12 py-6 bg-charcoal"
+            >
               Claim Your Area First
-            </Button>
+            </button>
           </form>
         </div>
       </section>
