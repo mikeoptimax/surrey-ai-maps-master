@@ -4,6 +4,10 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { supabase } from "@/lib/supabase"
+
+console.log('Supabase client:', supabase)
+console.log('Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL)
 
 export default function Home() {
   const [formData, setFormData] = useState({
@@ -12,23 +16,86 @@ export default function Home() {
     postcode: "",
     serviceType: ""
   })
+  
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const testimonials = [
+    {
+      business: "THE PLUMBER | SHOREDITCH",
+      type: "Plumbing Services",
+      before: "Page 5 on Google",
+      after: "#1 in Maps + 450% more calls",
+      time: "47 days",
+      quote: "OptiMAX-ai completely transformed our online presence. We went from invisible to #1 in Maps in under 2 months.",
+      author: "James Mitchell"
+    },
+    {
+      business: "EMERGENCY PLUMBER | GUILDFORD",
+      type: "Emergency Services",
+      before: "Page 3 rankings",
+      after: "#1 + 47 calls/month",
+      time: "42 days",
+      quote: "The ROI has been incredible. Our phone hasn't stopped ringing since they optimized our GBP.",
+      author: "Sarah Johnson"
+    },
+    {
+      business: "ROOFER | WOKING",
+      type: "Roofing Services",
+      before: "2 calls/week",
+      after: "5 calls/day + AI booking",
+      time: "60 days",
+      quote: "Best investment we've made. Real leads, real results, not just rankings.",
+      author: "David Thompson"
+    }
+  ];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    console.log('Form submitted with data:', formData)
+    
+    const timestamp = new Date().toISOString()
+    const currentUrl = typeof window !== 'undefined' ? window.location.href : ''
     
     const dataToSend = {
       businessName: formData.businessName || '',
       phone: formData.phone || '',
       postcode: formData.postcode || '',
       serviceType: formData.serviceType || '',
-      timestamp: new Date().toISOString(),
+      timestamp: timestamp,
       source: 'optimax-homepage',
-      url: typeof window !== 'undefined' ? window.location.href : ''
+      url: currentUrl
     }
     
     // Store locally for user experience
     if (typeof window !== 'undefined') {
       localStorage.setItem('leadFormData', JSON.stringify(formData))
+    }
+    
+    // Save to Supabase
+    try {
+      console.log('Attempting Supabase insert...')
+      const { data, error } = await supabase
+        .from('leads')
+        .insert([{
+          business_name: formData.businessName,
+          phone: formData.phone,
+          postcode: formData.postcode,
+          service_type: formData.serviceType,
+          created_at: timestamp,
+          source: 'optimax-homepage',
+          url: currentUrl
+        }])
+      
+      console.log('Supabase response:', { data, error })
+      
+      if (error) {
+        console.error('Supabase error details:', error)
+      } else {
+        console.log('Successfully saved to Supabase!')
+      }
+    } catch (supabaseError) {
+      console.error('Supabase insert failed:', supabaseError)
+      // Continue with webhook and redirect even if Supabase fails
     }
     
     // Send to n8n webhook
@@ -182,6 +249,22 @@ export default function Home() {
               <p className="text-lg">
                 Most Surrey SEO agencies show keyword rankings. We show phone calls and revenue.
               </p>
+              
+              {/* Add stat boxes */}
+              <div className="space-y-6 mt-8">
+                <div className="bg-white p-6 rounded border-l-6 border-orange shadow-md">
+                  <div className="data-mono text-4xl font-bold text-orange mb-2">87%</div>
+                  <p className="text-lg">of customers find businesses on Google Maps first. If you're not visible, you don't exist.</p>
+                </div>
+                <div className="bg-white p-6 rounded border-l-6 border-orange shadow-md">
+                  <div className="data-mono text-4xl font-bold text-orange mb-2">£500+</div>
+                  <p className="text-lg">in lost revenue every single day you're not ranking. That's £15,000+ per month going to your competitors.</p>
+                </div>
+                <div className="bg-white p-6 rounded border-l-6 border-orange shadow-md">
+                  <div className="data-mono text-4xl font-bold text-orange mb-2">24/7</div>
+                  <p className="text-lg">Your competitors show up first - always. While you sleep, they're stealing your customers.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -338,39 +421,86 @@ export default function Home() {
       <section className="py-24 bg-navy">
         <div className="container mx-auto px-4">
           <h2 className="headline-xl text-white mb-16 text-center">
-            SURREY BUSINESSES<br />
-            WINNING WITH US
+            RESULTS THAT<br />
+            SPEAK LOUDER
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                business: "Surrey Architect | Epsom",
-                before: "Invisible on Google",
-                after: "#2 in Maps + £50k project",
-                time: "30 days"
-              },
-              {
-                business: "Emergency Plumber | Guildford", 
-                before: "Page 3 rankings",
-                after: "#1 + 47 calls/month",
-                time: "42 days"
-              },
-              {
-                business: "Roofer | Woking",
-                before: "2 calls/week", 
-                after: "5 calls/day + AI booking",
-                time: "60 days"
-              }
-            ].map((study, index) => (
-              <div key={index} className="bg-white p-8 border-l-6 border-orange">
-                <h3 className="font-bold text-lg mb-4">{study.business}</h3>
-                <div className="space-y-2">
-                  <div><strong>Before:</strong> {study.before}</div>
-                  <div><strong>After:</strong> {study.after}</div>
-                  <div className="data-mono text-orange font-bold">Time: {study.time}</div>
+          
+          <div className="relative max-w-6xl mx-auto px-20">
+            {/* Main carousel card with brutal border */}
+            <div className="bg-white border-4 border-charcoal shadow-[8px_8px_0_rgba(0,0,0,1)] p-16">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                {/* Left side - Case study details */}
+                <div>
+                  <h3 className="headline-lg text-navy mb-2">{testimonials[currentTestimonial].business}</h3>
+                  <p className="text-gray-600 mb-12 text-lg">{testimonials[currentTestimonial].type}</p>
+                  
+                  <div className="space-y-8">
+                    <div className="flex items-start gap-6">
+                      <div className="w-1 h-20 bg-red-500 flex-shrink-0"></div>
+                      <div className="flex-1">
+                        <p className="text-gray-600 mb-1">Before:</p>
+                        <p className="text-2xl font-semibold">{testimonials[currentTestimonial].before}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-6">
+                      <div className="w-1 h-20 bg-green-500 flex-shrink-0"></div>
+                      <div className="flex-1">
+                        <p className="text-gray-600 mb-1">After:</p>
+                        <p className="text-2xl font-semibold">{testimonials[currentTestimonial].after}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start gap-6">
+                      <div className="w-1 h-20 bg-orange flex-shrink-0"></div>
+                      <div className="flex-1">
+                        <p className="text-gray-600 mb-1">Timeframe:</p>
+                        <p className="text-2xl font-semibold text-orange">{testimonials[currentTestimonial].time}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Right side - Testimonial */}
+                <div className="bg-navy p-10 border-4 border-charcoal shadow-[6px_6px_0_rgba(0,0,0,1)]">
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(5)].map((_, i) => (
+                      <span key={i} className="text-orange text-3xl">★</span>
+                    ))}
+                  </div>
+                  <p className="text-white italic text-xl mb-6 leading-relaxed">
+                    "{testimonials[currentTestimonial].quote}"
+                  </p>
+                  <p className="text-orange text-lg">— {testimonials[currentTestimonial].author}</p>
                 </div>
               </div>
-            ))}
+            </div>
+            
+            {/* Navigation buttons - brutal style, outside the card */}
+            <button
+              className="absolute left-0 top-1/2 -translate-y-1/2 bg-orange text-white w-16 h-16 border-4 border-charcoal shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[6px_6px_0_rgba(0,0,0,1)] hover:-translate-x-1 transition-all font-bold text-2xl"
+              onClick={() => setCurrentTestimonial((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))}
+            >
+              ‹
+            </button>
+            <button
+              className="absolute right-0 top-1/2 -translate-y-1/2 bg-orange text-white w-16 h-16 border-4 border-charcoal shadow-[4px_4px_0_rgba(0,0,0,1)] hover:shadow-[6px_6px_0_rgba(0,0,0,1)] hover:translate-x-1 transition-all font-bold text-2xl"
+              onClick={() => setCurrentTestimonial((prev) => (prev === testimonials.length - 1 ? 0 : prev + 1))}
+            >
+              ›
+            </button>
+            
+            {/* Dots indicator */}
+            <div className="flex justify-center gap-3 mt-12">
+              {testimonials.map((_, index) => (
+                <span
+                  key={index}
+                  className={`w-3 h-3 rounded-full ${index === currentTestimonial ? 'bg-orange' : 'bg-gray-400'}`}
+                  onClick={() => setCurrentTestimonial(index)}
+                  style={{cursor: 'pointer'}}
+                ></span>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -378,14 +508,53 @@ export default function Home() {
       {/* Process Section */}
       <section className="py-24 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="headline-xl text-navy mb-16 text-center">OUR PROVEN PROCESS</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {["Audit", "Optimize GBP", "Build Authority", "Automate & Scale"].map((step, index) => (
-              <div key={index} className="text-center">
-                <div className="data-mono text-4xl font-bold text-orange mb-4">{index + 1}</div>
-                <h3 className="headline-lg text-navy">{step}</h3>
+          <h2 className="headline-xl text-navy mb-4 text-center">
+            DEAD SIMPLE
+          </h2>
+          <h2 className="headline-xl text-orange mb-16 text-center">
+            PROCESS
+          </h2>
+          
+          <div className="flex justify-center items-center max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-7 gap-4 items-center w-full">
+              {/* Card 1 */}
+              <div className="md:col-span-1 bg-white p-6 text-center border-4 border-orange h-[280px] flex flex-col justify-center">
+                <div className="text-3xl mb-3">🔍</div>
+                <div className="data-mono text-2xl font-bold mb-2">01</div>
+                <h3 className="text-xl font-bold mb-3">AUDIT</h3>
+                <p className="text-xs text-gray-600 leading-tight">Complete analysis of your current Google Business Profile and local search presence</p>
               </div>
-            ))}
+              
+              <div className="hidden md:flex justify-center text-3xl font-bold">+</div>
+              
+              {/* Card 2 */}
+              <div className="md:col-span-1 bg-white p-6 text-center border-4 border-charcoal h-[280px] flex flex-col justify-center">
+                <div className="text-3xl mb-3">⚙️</div>
+                <div className="data-mono text-2xl font-bold mb-2">02</div>
+                <h3 className="text-xl font-bold mb-3">OPTIMIZE</h3>
+                <p className="text-xs text-gray-600 leading-tight">Full optimization of your profile, content, and local SEO strategy</p>
+              </div>
+              
+              <div className="hidden md:flex justify-center text-3xl font-bold">+</div>
+              
+              {/* Card 3 */}
+              <div className="md:col-span-1 bg-white p-6 text-center border-4 border-orange h-[280px] flex flex-col justify-center">
+                <div className="text-3xl mb-3">📈</div>
+                <div className="data-mono text-2xl font-bold mb-2">03</div>
+                <h3 className="text-xl font-bold mb-3">DOMINATE</h3>
+                <p className="text-xs text-gray-600 leading-tight">Watch your rankings climb to the top 3 positions in Google Maps</p>
+              </div>
+              
+              <div className="hidden md:flex justify-center text-3xl font-bold">+</div>
+              
+              {/* Card 4 */}
+              <div className="md:col-span-1 bg-white p-6 text-center border-4 border-charcoal h-[280px] flex flex-col justify-center">
+                <div className="text-3xl mb-3">⚡</div>
+                <div className="data-mono text-2xl font-bold mb-2">04</div>
+                <h3 className="text-xl font-bold mb-3">SCALE</h3>
+                <p className="text-xs text-gray-600 leading-tight">Continuous optimization and scaling to maximize your local market share</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -160,4 +160,21 @@ All colors MUST be HSL.
   .animate-brutal-bounce {
     animation: brutal-bounce 2s ease-in-out infinite;
   }
+  
+  /* Additional Utility Classes */
+  .shadow-md {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .border-l-6 {
+    border-left-width: 6px;
+  }
+
+  .rounded {
+    border-radius: 0.25rem;
+  }
 }
