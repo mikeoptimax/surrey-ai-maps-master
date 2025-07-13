@@ -74,24 +74,31 @@ export default function Home() {
     // Save to Supabase
     try {
       console.log('Attempting Supabase insert...')
-      const { data, error } = await supabase
-        .from('leads')
-        .insert([{
-          business_name: formData.businessName,
-          phone: formData.phone,
-          postcode: formData.postcode,
-          service_type: formData.serviceType,
-          created_at: timestamp,
-          source: 'optimax-homepage',
-          url: currentUrl
-        }])
       
-      console.log('Supabase response:', { data, error })
-      
-      if (error) {
-        console.error('Supabase error details:', error)
+      if (!supabase) {
+        console.log('Supabase not configured, skipping database save')
+        // Still show success to the user
+        // Continue with webhook and redirect
       } else {
-        console.log('Successfully saved to Supabase!')
+        const { data, error } = await supabase
+          .from('leads')
+          .insert([{
+            business_name: formData.businessName,
+            phone: formData.phone,
+            postcode: formData.postcode,
+            service_type: formData.serviceType,
+            created_at: timestamp,
+            source: 'optimax-homepage',
+            url: currentUrl
+          }])
+        
+        console.log('Supabase response:', { data, error })
+        
+        if (error) {
+          console.error('Supabase error details:', error)
+        } else {
+          console.log('Successfully saved to Supabase!')
+        }
       }
     } catch (supabaseError) {
       console.error('Supabase insert failed:', supabaseError)
